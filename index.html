@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal Pro | Student Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="ball ball-1"></div>
+        <div class="ball ball-2"></div>
+        <div class="ball ball-3"></div>
+        <div class="ball ball-4"></div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>EduPortal Pro</h3>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 1: Authentication Section -->
+    <section id="auth-section" class="auth-section">
+        <div class="container">
+            <div class="row justify-content-center align-items-center min-vh-100">
+                <div class="col-xl-5 col-lg-6 col-md-8">
+                    <div class="auth-card">
+                        <div class="auth-header">
+                            <div class="logo">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>EduPortal Pro</span>
+                            </div>
+                            <h2 id="auth-title">Create Your Account</h2>
+                            <p id="auth-subtitle">Sign up to start your student journey</p>
+                        </div>
+                        
+                        <div class="auth-body">
+                            <form id="auth-form" class="auth-form">
+                                <div class="input-group">
+                                    <div class="input-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <div class="input-icon">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                                    <button type="button" class="password-toggle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="form-options">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="remember" class="form-check-input">
+                                        <label for="remember" class="form-check-label">Remember me</label>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="auth-btn" id="auth-btn">
+                                    <span class="btn-text">Create Account</span>
+                                    <div class="btn-loader" id="auth-loader">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </button>
+                            </form>
+                            
+                            <div class="auth-footer">
+                                <p>Already have an account? <a href="#" id="switch-to-login">Sign In</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 2: Student Registration Section -->
+    <section id="registration-section" class="registration-section" style="display: none;">
+        <div class="container">
+            <div class="registration-header">
+                <div class="back-button" id="back-to-auth">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="registration-progress"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <span class="step active">1</span>
+                        <span class="step">2</span>
+                        <span class="step">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="registration-card">
+                <div class="registration-body">
+                    <!-- Step 1: Personal Information -->
+                    <div class="registration-step active" id="step-1">
+                        <div class="step-header">
+                            <div class="step-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3>Personal Information</h3>
+                            <p>Let's start with your basic details</p>
+                        </div>
+                        
+                        <form class="step-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Full Name <span class="text-danger">*</span></label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Student ID <span class="text-danger">*</span></label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-id-card"></i>
+                                            <input type="text" id="studentId" class="form-control" placeholder="Enter student ID" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Date of Birth <span class="text-danger">*</span></label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-calendar"></i>
+                                            <input type="date" id="dob" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Phone Number <span class="text-danger">*</span></label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="tel" id="phone" class="form-control" placeholder="Enter phone number" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label>Address <span class="text-danger">*</span></label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-home"></i>
+                                    <textarea id="address" class="form-control" rows="3" placeholder="Enter your complete address" required></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button type="button" class="btn-next" data-next="2">Next <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 2: Academic Information -->
+                    <div class="registration-step" id="step-2">
+                        <div class="step-header">
+                            <div class="step-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Academic Information</h3>
+                            <p>Tell us about your academic background</p>
+                        </div>
+                        
+                        <form class="step-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Course <span class="text-danger">*</span></label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-book"></i>
+                                            <select id="course" class="form-control" required>
+                                                <option value="">Select Course</option>
+                                                <option value="Computer Science">Computer Science</option>
+                                                <option value="Business Administration">Business Administration</option>
+                                                <option value="Engineering">Engineering</option>
+                                                <option value="Medicine">Medicine</option>
+                                                <option value="Arts">Arts</option>
+                                                <option value="Science">Science</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Year of Study <span class="text-danger">*</span></label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <select id="year" class="form-control" required>
+                                                <option value="">Select Year</option>
+                                                <option value="1">First Year</option>
+                                                <option value="2">Second Year</option>
+                                                <option value="3">Third Year</option>
+                                                <option value="4">Fourth Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Emergency Contact <span class="text-danger">*</span></label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-user-plus"></i>
+                                            <input type="text" id="emergencyContact" class="form-control" placeholder="Name and phone" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Parent/Guardian</label>
+                                        <div class="input-with-icon">
+                                            <i class="fas fa-users"></i>
+                                            <input type="text" id="parentName" class="form-control" placeholder="Enter name">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button type="button" class="btn-prev" data-prev="1"><i class="fas fa-arrow-left"></i> Previous</button>
+                                <button type="button" class="btn-next" data-next="3">Next <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 3: Review & Submit -->
+                    <div class="registration-step" id="step-3">
+                        <div class="step-header">
+                            <div class="step-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3>Review & Submit</h3>
+                            <p>Review your information and complete registration</p>
+                        </div>
+                        
+                        <div class="review-section">
+                            <div class="review-card">
+                                <h5>Personal Information</h5>
+                                <div class="review-item">
+                                    <span>Full Name:</span>
+                                    <span id="review-name">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <span>Student ID:</span>
+                                    <span id="review-id">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <span>Date of Birth:</span>
+                                    <span id="review-dob">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <span>Phone:</span>
+                                    <span id="review-phone">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <span>Address:</span>
+                                    <span id="review-address">-</span>
+                                </div>
+                            </div>
+                            
+                            <div class="review-card">
+                                <h5>Academic Information</h5>
+                                <div class="review-item">
+                                    <span>Course:</span>
+                                    <span id="review-course">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <span>Year:</span>
+                                    <span id="review-year">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <span>Emergency Contact:</span>
+                                    <span id="review-emergency">-</span>
+                                </div>
+                                <div class="review-item">
+                                    <span>Parent/Guardian:</span>
+                                    <span id="review-parent">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-actions">
+                            <button type="button" class="btn-prev" data-prev="2"><i class="fas fa-arrow-left"></i> Previous</button>
+                            <button type="button" class="btn-submit" id="save-btn">
+                                <span class="btn-text">Complete Registration</span>
+                                <div class="btn-loader" id="save-loader">
+                                    <div class="spinner"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 3: Dashboard Section -->
+    <section id="dashboard" class="dashboard" style="display: none;">
+        <!-- Navigation -->
+        <nav class="dashboard-nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduPortal Pro</span>
+                </div>
+                <div class="nav-actions">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <span class="user-name" id="nav-student-name">Student</span>
+                    </div>
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="dashboard-content">
+            <div class="container">
+                <!-- Welcome Section -->
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <h1 id="welcome-title">Welcome Back, Student!</h1>
+                        <p id="welcome-subtitle">Here's your academic overview</p>
+                    </div>
+                    <div class="welcome-graphic">
+                        <div class="graphic-circle"></div>
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div class="row">
+                    <div class="col-xl-4 col-lg-5">
+                        <!-- Student Profile Card -->
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <div class="profile-avatar">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div class="profile-info">
+                                    <h3 id="student-name">Student Name</h3>
+                                    <p id="student-id">ID: Not Set</p>
+                                    <span class="badge" id="student-course">Not Enrolled</span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="info-year">-</span>
+                                        <span class="stat-label">Year</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <span class="stat-value" id="info-phone">-</span>
+                                        <span class="stat-label">Phone</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ✅ FIXED: Edit and Delete Buttons -->
+                            <div class="profile-actions">
+                                <button class="btn-edit" id="edit-profile-btn">
+                                    <i class="fas fa-edit"></i>
+                                    Edit Profile
+                                </button>
+                                <button class="btn-danger" id="delete-profile-btn">
+                                    <i class="fas fa-trash"></i>
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-8 col-lg-7">
+                        <!-- Information Cards -->
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <div class="info-icon personal">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h4>Personal Details</h4>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-item">
+                                        <span class="info-label">Email:</span>
+                                        <span class="info-value" id="info-email">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Date of Birth:</span>
+                                        <span class="info-value" id="info-dob">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Address:</span>
+                                        <span class="info-value" id="info-address">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <div class="info-icon academic">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <h4>Academic Details</h4>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-item">
+                                        <span class="info-label">Course:</span>
+                                        <span class="info-value" id="info-course">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Year of Study:</span>
+                                        <span class="info-value" id="info-year-full">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Student Since:</span>
+                                        <span class="info-value" id="info-created">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <div class="info-icon emergency">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h4>Emergency Contact</h4>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-item">
+                                        <span class="info-label">Contact Person:</span>
+                                        <span class="info-value" id="info-emergency">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Parent/Guardian:</span>
+                                        <span class="info-value" id="info-parent">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+</body>
+ <script type="module" src="firebase.js"></script>
+    <script type="module" src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</html>
